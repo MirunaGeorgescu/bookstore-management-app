@@ -12,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 
 public abstract class Person extends AbstractEntity {
+    // inherits from AbstractEntity: id, createdDate, updatedDate, deletedDate
     private String name;
     private String address;
     private String email;
