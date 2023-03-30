@@ -1,10 +1,12 @@
 package ro.pao.model;
 
+import ro.pao.model.abstracts.AbstractEntity;
 import ro.pao.model.enums.BookGenres;
 
 import java.time.LocalDate;
 
-public class Book {
+public class Book  extends AbstractEntity {
+    // inherits from AbstractEntity: id, createdDate, updatedDate, deletedDate
     private String ISBN;
     private String title;
     private String author;
