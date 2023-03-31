@@ -74,7 +74,6 @@ public class Menu {
         }
     }
 
-
     // the newMember method: creates a new member account
     public void newMember(){
         String newMemberText = "----------------------------- Welcome! Create your account -----------------------------\n" +
@@ -144,5 +143,49 @@ public class Menu {
 
         System.out.println("Account created successfully!");
     }
+
+    // the mainMenu method: displays the welcome text, the main menu and handles the user's input
+    public void mainMenu() {
+        Scanner scanner = new Scanner(System.in);
+        Boolean exit = false;
+
+        while(!exit){
+            intro();
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    if(memberLogin()){
+                        // if login is successful, display the member menu
+                        //TODO: member menu
+                    } else {
+                        // if login is unsuccessful, display the loginFailed menu
+                    }
+                    break;
+                case 2:
+                    if(librarianLogin()) {
+                        // if login is successful, display the librarian menu
+                        //TODO: librarian menu
+                    } else {
+                        // if login is unsuccessful, display the loginFailed menu
+                    }
+                    break;
+                case 3:
+                    newMember();
+                    break;
+                case 4:
+                    newLibrarian();
+                    break;
+                case 5:
+                    System.out.println("Thank you for using our library!");
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option!");
+                    break;
+            }
+        }
+    }
+
 
 }
