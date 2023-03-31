@@ -7,7 +7,7 @@ import javax.swing.text.html.Option;
 import java.util.*;
 
 public class MemberServiceImpl implements MemberService {
-    private Set<Member> members = new HashSet<>();
+    private static Set<Member> members = new HashSet<>();
 
     @Override
     public Optional<Member> getMemberById(UUID id){
@@ -57,6 +57,7 @@ public class MemberServiceImpl implements MemberService {
                 .ifPresent(members::remove);
     }
 
+    // the isMember method: checks if the username and password are correct
     @Override
     public Boolean isMember(String userName, String password){
         if(members .stream()
@@ -87,4 +88,10 @@ public class MemberServiceImpl implements MemberService {
         members.add(member);
     }
 
+    // the populateMemberDatabase method: adds members to the "database"
+    @Override
+    public void populateMemberDatabase(){
+        Member member = new Member("user1", "user1", "Daria Chiriac", "Strada A", "kiri@mail.com", "074353627364");
+        members.add(member);
+    }
 }

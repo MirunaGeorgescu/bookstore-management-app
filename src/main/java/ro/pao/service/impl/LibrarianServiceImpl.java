@@ -7,7 +7,7 @@ import ro.pao.service.LibrarianService;
 import java.util.*;
 
 public class LibrarianServiceImpl implements LibrarianService {
-    private Set<Librarian> librarians = new HashSet<>();
+    private static Set<Librarian> librarians = new HashSet<>();
 
     @Override
     public Optional<Librarian> getLibrarianById(UUID id){
@@ -89,4 +89,10 @@ public class LibrarianServiceImpl implements LibrarianService {
         librarians.add(librarian);
     }
 
+    // the populateLibrarianDatabase method: adds librarians to the "database"
+    @Override
+    public void populateLibrarianDatabase(){
+        Librarian librarian = new Librarian("librarian1", "librarian1", "Andreea Ciocan", "Str. B", "cioucan@mail.com", "0762423424");
+        librarians.add(librarian);
+    }
 }

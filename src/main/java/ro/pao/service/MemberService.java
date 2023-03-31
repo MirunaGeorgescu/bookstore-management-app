@@ -21,9 +21,11 @@ public interface MemberService {
 
     void deleteMemberByUserName(String userName);
 
-    // memberLogin method: checks if the username and password are correct
+    // the isMember method: checks if the username and password are correct
     Boolean isMember(String username, String password);
 
-    // createMember method: creates a new member
     void createMember(String username, String password, String name, String address, String email, String phoneNumber);
+
+    // the populateMemberDatabase method: adds members to the "database"
+    void populateMemberDatabase();
 }
