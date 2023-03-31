@@ -9,12 +9,16 @@ import java.util.UUID;
 public interface MemberService {
     Optional<Member> getMemberById(UUID id);
 
-    List<Member> gettAllMembers();
-
     Optional<Member> getMemberByUserName(String userName);
+
+    List<Member> gettAllMembers();
 
     void addMember(Member member);
 
     void addMembers(List<Member> membersList);
+
+    void deleteMemberById(UUID id);
+
+    void deleteMemberByUserName(String userName);
 
 }

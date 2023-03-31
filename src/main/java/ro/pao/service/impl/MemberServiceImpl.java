@@ -33,11 +33,27 @@ public class MemberServiceImpl implements MemberService {
         members.add(member);
     }
 
+    @Override
     public void addMembers(List<Member> membersList){
         members.addAll(membersList);
     }
 
+    @Override
+    public void deleteMemberById(UUID id){
+        members
+                .stream()
+                .filter(member -> member.getId().equals(id))
+                .findFirst()
+                .ifPresent(members::remove);
+    }
 
-
+    @Override
+    public void deleteMemberByUserName(String userName){
+        members
+                .stream()
+                .filter(member -> member.getUserName().equals(userName))
+                .findFirst()
+                .ifPresent(members::remove);
+    }
 
 }
