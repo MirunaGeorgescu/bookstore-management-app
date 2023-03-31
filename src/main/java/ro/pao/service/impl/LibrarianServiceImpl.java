@@ -1,6 +1,7 @@
 package ro.pao.service.impl;
 
 import ro.pao.model.Librarian;
+import ro.pao.model.Member;
 import ro.pao.service.LibrarianService;
 
 import java.util.*;
@@ -57,6 +58,28 @@ public class LibrarianServiceImpl implements LibrarianService {
                 .ifPresent(librarians::remove);
     }
 
+    // the isLibrarian method: checks if the username and password are correct
+    @Override
+    public Boolean isLibrarian(String userName, String password){
+        if( librarians.stream()
+                .filter(member -> member.getUserName().equals(userName))
+                .findFirst()
+                .isPresent()) {
+            Optional<Librarian> currentLibrarian = librarians
+                    .stream()
+                    .filter(member -> member.getUserName().equals(userName))
+                    .findFirst();
 
+            if(currentLibrarian.get().getPassword().equals(password)){
+                return true;
+            } else {
+                System.out.println("Wrong password!");
+                return false;
+            }
+        } else {
+            System.out.println("Wrong username!");
+            return false;
+        }
+    }
 
 }

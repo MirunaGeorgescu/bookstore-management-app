@@ -24,6 +24,12 @@ public class Main {
                     }
                     break;
                 case 2:
+                    if(menu.librarianLogin()) {
+                        // if login is successful, display the librarian menu
+                        //TODO: librarian menu
+                    } else {
+                        // if login is unsuccessful, display the loginFailed menu
+                    }
                     break;
                 case 3:
                     break;

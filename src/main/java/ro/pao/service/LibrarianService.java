@@ -20,4 +20,7 @@ public interface LibrarianService {
     void deleteLibrarianById(UUID id);
 
     void deleteLibrarianByUserName(String userName);
+
+    // the isLibrarian method: checks if the username and password are correct
+    Boolean isLibrarian(String userName, String password);
 }

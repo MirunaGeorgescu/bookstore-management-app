@@ -50,4 +50,27 @@ public class Menu {
             return false;
         }
     }
+
+    // the librarianLogin method: checks if the username and password are correct
+    public Boolean librarianLogin(){
+        String loginText = "----------------------------- Welcome back! -----------------------------\n" +
+                "Please enter your username and password:\n" +
+                "Username: ";
+        System.out.println(loginText);
+
+        Scanner scanner = new Scanner(System.in);
+        String username = scanner.nextLine();
+
+        loginText = "Password: ";
+        System.out.println(loginText);
+        String password = scanner.nextLine();
+
+        if (librarianService.isLibrarian(username, password)){
+            System.out.println("Login successful!");
+            return true;
+        } else {
+            System.out.println("Login failed!");
+            return false;
+        }
+    }
 }
