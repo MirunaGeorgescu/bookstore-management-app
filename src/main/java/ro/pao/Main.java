@@ -32,6 +32,7 @@ public class Main {
                     }
                     break;
                 case 3:
+                    menu.newMember();
                     break;
                 case 4:
                     break;

@@ -15,11 +15,11 @@ import java.util.UUID;
 @EqualsAndHashCode
 public abstract class AbstractEntity {
 
-    private UUID id;
+    protected UUID id;
 
-    private LocalDate creationDate;
+    protected LocalDate creationDate;
 
-    private LocalDate updateDate;
+    protected LocalDate updateDate;
 
-    private LocalDate deleteDate;
+    protected LocalDate deleteDate;
 }

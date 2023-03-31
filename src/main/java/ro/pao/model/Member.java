@@ -19,4 +19,10 @@ public class Member extends Account {
     // inherits from Account: userName, password, status
     private LocalDate dateOfMembership;
     private int totalOfBooksBorrowed;
+
+    public Member(String userName, String password, String name, String address, String email, String phoneNumber) {
+        super(userName, password, name, address, email, phoneNumber);
+        this.dateOfMembership = LocalDate.now();
+        this.totalOfBooksBorrowed = 0;
+    }
 }

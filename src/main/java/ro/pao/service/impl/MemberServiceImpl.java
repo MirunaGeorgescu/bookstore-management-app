@@ -81,4 +81,10 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    @Override
+    public void createMember(String username, String password, String name, String address, String email, String phoneNumber){
+        Member member = new Member(username, password, name, address, email, phoneNumber);
+        members.add(member);
+    }
+
 }
