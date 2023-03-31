@@ -8,8 +8,6 @@ import ro.pao.model.abstracts.Account;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class Librarian extends Account {
     // inherits from AbstractEntity: id, createdDate, updatedDate, deletedDate
