@@ -20,5 +20,4 @@ public interface LibrarianService {
     void deleteLibrarianById(UUID id);
 
     void deleteLibrarianByUserName(String userName);
-
 }
