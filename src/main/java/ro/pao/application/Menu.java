@@ -144,6 +144,56 @@ public class Menu {
         System.out.println("Account created successfully!");
     }
 
+    // the introMemberMenu: displays the menu for the members
+    public void introMemberMenu(){
+        String intro = "----------------------------- MEMBER MENU -----------------------------\n" +
+                "Please choose an option:\n" +
+                "1. Borrow a book\n" +
+                "2. Return a book\n" +
+                "3. View borrowed books\n" +
+                "4. Search for a book\n" +
+                "5. View all books\n" +
+                "6. Log out";
+        System.out.println(intro);
+    }
+
+    public void memberMenu(){
+        Scanner scanner = new Scanner(System.in);
+        Boolean exit = false;
+
+        while(!exit)
+        {
+            introMemberMenu();
+            int option = scanner.nextInt();
+
+            switch(option){
+                case 1:
+                    // Borrow a book
+                    break;
+                case 2:
+                    // Return a book
+                    break;
+                case 3:
+                    // View borrowed books
+                    break;
+                case 4:
+                    // Search for a book
+                    break;
+                case 5:
+                    // View all books
+                    break;
+                case 6:
+                    // 6. Log out
+                    System.out.println("See you next time!");
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option!");
+                    break;
+            }
+        }
+    }
+
     // the mainMenu method: displays the welcome text, the main menu and handles the user's input
     public void mainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -155,14 +205,16 @@ public class Menu {
 
             switch (option) {
                 case 1:
+                    // Log in as a member
                     if(memberLogin()){
-                        // if login is successful, display the member menu
-                        //TODO: member menu
+                        // if login is successful, displays the member menu
+                        memberMenu();
                     } else {
-                        // if login is unsuccessful, display the loginFailed menu
+                        // if login is unsuccessful, displays the loginFailed menu
                     }
                     break;
                 case 2:
+                    // Log in as a librarian
                     if(librarianLogin()) {
                         // if login is successful, display the librarian menu
                         //TODO: librarian menu
@@ -171,12 +223,15 @@ public class Menu {
                     }
                     break;
                 case 3:
+                    // Make a new member account
                     newMember();
                     break;
                 case 4:
+                    // Make a new librarian account
                     newLibrarian();
                     break;
                 case 5:
+                    // Exit
                     System.out.println("Thank you for using our library!");
                     exit = true;
                     break;
@@ -186,6 +241,5 @@ public class Menu {
             }
         }
     }
-
 
 }
