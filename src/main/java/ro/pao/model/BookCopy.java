@@ -1,9 +1,18 @@
 package ro.pao.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ro.pao.model.enums.BookFormat;
 import ro.pao.model.enums.BookStatus;
 
 import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class BookCopy extends Book {
     // inherits from AbstractEntity: id, createdDate, updatedDate, deletedDate
