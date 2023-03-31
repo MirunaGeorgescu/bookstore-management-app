@@ -3,6 +3,7 @@ package ro.pao.service.impl;
 import ro.pao.model.Member;
 import ro.pao.service.MemberService;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 public class MemberServiceImpl implements MemberService {
@@ -54,6 +55,30 @@ public class MemberServiceImpl implements MemberService {
                 .filter(member -> member.getUserName().equals(userName))
                 .findFirst()
                 .ifPresent(members::remove);
+    }
+
+    @Override
+    public Boolean isMember(String userName, String password){
+        if(members .stream()
+                .filter(member -> member.getUserName().equals(userName))
+                .findFirst()
+                .isPresent()) {
+            Optional<Member> currentMember = members
+                    .stream()
+                    .filter(member -> member.getUserName().equals(userName))
+                    .findFirst();
+
+            if(currentMember.get().getPassword().equals(password)){
+                return true;
+            } else {
+                System.out.println("Wrong password!");
+                return false;
+            }
+
+        } else {
+            System.out.println("Wrong username!");
+            return false;
+        }
     }
 
 }

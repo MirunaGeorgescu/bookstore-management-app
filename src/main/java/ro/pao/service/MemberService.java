@@ -21,4 +21,6 @@ public interface MemberService {
 
     void deleteMemberByUserName(String userName);
 
+    // memberLogin method: checks if the username and password are correct
+    Boolean isMember(String username, String password);
 }

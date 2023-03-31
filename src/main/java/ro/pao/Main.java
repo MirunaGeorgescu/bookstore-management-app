@@ -7,13 +7,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Menu menu = Menu.getInstance();
-        menu.intro();
 
-        int option = scanner.nextInt();
+
         Boolean exit = false;
         while(!exit){
+            menu.intro();
+            int option = scanner.nextInt();
+
             switch (option) {
                 case 1:
+                    if(menu.memberLogin()){
+                        // if login is successful, display the member menu
+                        //TODO: member menu
+                    } else {
+                        // if login is unsuccessful, display the loginFailed menu
+                    }
                     break;
                 case 2:
                     break;
@@ -30,5 +38,6 @@ public class Main {
                     break;
             }
         }
+
     }
 }
