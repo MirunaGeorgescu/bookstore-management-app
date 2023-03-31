@@ -23,4 +23,7 @@ public interface LibrarianService {
 
     // the isLibrarian method: checks if the username and password are correct
     Boolean isLibrarian(String userName, String password);
+
+    // the newLibrarian method: creates a new librarian account
+    void createLibrarian(String username, String password, String name, String address, String email, String phoneNumber);
 }

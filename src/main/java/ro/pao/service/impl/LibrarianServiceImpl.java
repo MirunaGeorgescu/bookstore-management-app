@@ -82,4 +82,11 @@ public class LibrarianServiceImpl implements LibrarianService {
         }
     }
 
+    // the createLibrarian method: creates a new librarian account
+    @Override
+    public void createLibrarian(String username, String password, String name, String address, String email, String phoneNumber){
+        Librarian librarian = new Librarian(username, password, name, address, email, phoneNumber);
+        librarians.add(librarian);
+    }
+
 }

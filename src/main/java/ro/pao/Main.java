@@ -35,6 +35,7 @@ public class Main {
                     menu.newMember();
                     break;
                 case 4:
+                    menu.newLibrarian();
                     break;
                 case 5:
                     System.out.println("Thank you for using our library!");

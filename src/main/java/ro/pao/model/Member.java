@@ -20,8 +20,8 @@ public class Member extends Account {
     private LocalDate dateOfMembership;
     private int totalOfBooksBorrowed;
 
-    public Member(String userName, String password, String name, String address, String email, String phoneNumber) {
-        super(userName, password, name, address, email, phoneNumber);
+    public Member(String username, String password, String name, String address, String email, String phoneNumber) {
+        super(username, password, name, address, email, phoneNumber);
         this.dateOfMembership = LocalDate.now();
         this.totalOfBooksBorrowed = 0;
     }

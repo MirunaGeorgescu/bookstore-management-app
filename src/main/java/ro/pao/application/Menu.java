@@ -74,6 +74,7 @@ public class Menu {
         }
     }
 
+
     // the newMember method: creates a new member account
     public void newMember(){
         String newMemberText = "----------------------------- Welcome! Create your account -----------------------------\n" +
@@ -105,5 +106,43 @@ public class Menu {
         String phoneNumber = scanner.nextLine();
 
         memberService.createMember(username, password, name, address, email, phoneNumber);
+
+        System.out.println("Account created successfully!");
     }
+
+    // the newLibrarian method: creates a new librarian account
+    public void newLibrarian(){
+        String newMemberText = "----------------------------- Welcome! Create your account -----------------------------\n" +
+                "Please enter your username and password:\n" +
+                "Username: ";
+        System.out.println(newMemberText);
+
+        Scanner scanner = new Scanner(System.in);
+        String username = scanner.nextLine();
+
+        newMemberText = "Password: ";
+        System.out.println(newMemberText);
+        String password = scanner.nextLine();
+
+        newMemberText = "Please enter your name: ";
+        System.out.println(newMemberText);
+        String name = scanner.nextLine();
+
+        newMemberText = "Please enter your address: ";
+        System.out.println(newMemberText);
+        String address = scanner.nextLine();
+
+        newMemberText = "Please enter your email: ";
+        System.out.println(newMemberText);
+        String email = scanner.nextLine();
+
+        newMemberText = "Please enter your phone number: ";
+        System.out.println(newMemberText);
+        String phoneNumber = scanner.nextLine();
+
+        librarianService.createLibrarian(username, password, name, address, email, phoneNumber);
+
+        System.out.println("Account created successfully!");
+    }
+
 }
