@@ -3,6 +3,8 @@ package ro.pao.application;
 import ro.pao.model.Book;
 import ro.pao.service.impl.BookServiceImpl;
 import ro.pao.service.BookService;
+
+import java.util.Optional;
 import java.util.Scanner;
 
 public class LibrarianMenu {
@@ -16,21 +18,6 @@ public class LibrarianMenu {
 
 
     // ADDING A NEW BOOK
-    public Boolean bookGenreValidation(String genre){
-        if(genre.equalsIgnoreCase("FANTASY")
-                || genre.equalsIgnoreCase("ROMANCE")
-                || genre.equalsIgnoreCase("SCIENCE_FICTION")
-                || genre.equalsIgnoreCase("LITERARY_FICTION")
-                || genre.equalsIgnoreCase("HORROR")
-                || genre.equalsIgnoreCase("MYSTERY")
-                || genre.equalsIgnoreCase("THRILLER")){
-            genre.toUpperCase();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     // the newBook method: creates a new book
     public void newBook(){
         Scanner scanner = new Scanner(System.in);
@@ -48,7 +35,7 @@ public class LibrarianMenu {
         newBookText = "Please enter the book's genre: ";
         System.out.println(newBookText);
         String genre = scanner.nextLine();
-        while(!bookGenreValidation(genre)){
+        while(!bookService.bookGenreValidation(genre)){
             System.out.println("Invalid genre! The options are:\n " +
                     "-> FANTASY\n -> ROMANCE\n -> SCIENCE_FICTION\n -> LITERARY_FICTION\n -> HORROR\n -> MYSTERY\n -> THRILLER\n" +
                     "Please enter a valid genre: ");
@@ -144,16 +131,57 @@ public class LibrarianMenu {
 
 
 
-    // VIEW ALL BOOKS
-    public void viewAllBooks(){
-        String text = "----------------------------- ALL BOOKS -----------------------------\n";
-        System.out.println(text);
+    // SEARCH BOOKS
+    public void introSearchBooks(){
+        Scanner scanner = new Scanner(System.in);
+        String searchBookText = "----------------------------- SEARCH BOOK -----------------------------\n" +
+                "Please choose an option:\n" +
+                "1. Search by title\n" +
+                "2. Search by author\n" +
+                "3. Search by genre\n" +
+                "4. Search by ISBN\n" +
+                "5. Go back to the menu";
+        System.out.println(searchBookText);
+    }
 
-        for(Book book : bookService.getAllBooks()){
-           text = "'" + book.getTitle() + "'" + "\n   by " + book.getAuthor() + "\n";
-           System.out.println(text);
+    public void searchBooks() {
+        Scanner scanner = new Scanner(System.in);
+
+        Boolean exit = false;
+        while(!exit)
+        {
+            introSearchBooks();
+            int option = scanner.nextInt();
+            switch(option){
+                case 1:
+                    // Search by title
+                    bookService.searchBookByTitle();
+                    break;
+                case 2:
+                    // Search by author
+                    bookService.searchBookByAuthor();
+                    break;
+                case 3:
+                    // Search by genre
+                    bookService.searchBookByGenre();
+                    break;
+                case 4:
+                    // Search by ISBN
+                    bookService.searchBookByISBN();
+                    break;
+                case 5:
+                    // Go back to the menu
+                    librarianMenu();
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option! Please try again: ");
+                    option = scanner.nextInt();
+                    break;
+            }
         }
     }
+
 
 
     // LIBRARIAN MENU
@@ -164,7 +192,7 @@ public class LibrarianMenu {
                 "1. Add a book\n" +
                 "2. Remove a book\n" +
                 "3. View all books\n" +
-                "4. Search for a book\n" +
+                "4. Search for a books\n" +
                 "5. View all members\n" +
                 "6. Search for a member\n" +
                 "7. Log out";
@@ -192,10 +220,11 @@ public class LibrarianMenu {
                     break;
                 case 3:
                     // View all books
-                    viewAllBooks();
+                    bookService.viewAllBooks();
                     break;
                 case 4:
                     // Search for a book
+                    searchBooks();
                     break;
                 case 5:
                     // View all members

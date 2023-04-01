@@ -24,4 +24,24 @@ public interface BookService {
   void deleteBookByISBN(String ISBN);
 
   void populateBookDatabase();
+
+  void viewAllBooks();
+
+  void searchBookByTitle();
+
+  void printBook(Book book);
+
+  void printBookDetails(Book book);
+
+  void searchBookByISBN();
+
+  void searchBookByAuthor();
+
+  List<Book> getBookByAuthor(String author);
+
+  void searchBookByGenre();
+
+  Boolean bookGenreValidation(String genre);
+
+
 }
