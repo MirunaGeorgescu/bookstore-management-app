@@ -232,6 +232,52 @@ public class LibrarianMenu {
     }
 
 
+    // VIEW ALL BOOKS
+    public void introViewAllBooks(){
+        String text = "----------------------------- ALL BOOKS -----------------------------\n" +
+                "Please choose an option:\n" +
+                "1. View all books sorted by Author\n" +
+                "2. View all books sorted by Title\n" +
+                "3. View all books sorted by Genre\n" +
+                "4. Go back to the menu";
+        System.out.println(text);
+    }
+
+    public void viewAllBooks(){
+        Scanner scanner = new Scanner(System.in);
+        Boolean exit = false;
+
+        while(!exit)
+        {
+            introViewAllBooks();
+            int option = scanner.nextInt();
+
+            switch(option){
+                case 1:
+                    // View all books sorted by Author
+                    bookService.viewAllBooksSortedByAuthor();
+                    break;
+                case 2:
+                    // View all books sorted by Title
+                    bookService.viewAllBooksSortedByTitle();
+                    break;
+                case 3:
+                    // View all books sorted by Genre
+                    bookService.viewAllBooksSortedByGenre();
+                    break;
+                case 4:
+                    // Go back to the menu
+                    librarianMenu();
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option! Please try again: ");
+                    option = scanner.nextInt();
+                    break;
+            }
+        }
+    }
+
 
     // LIBRARIAN MENU
     // the introLibrarianMenu: displays the menu for the librarians
@@ -269,7 +315,7 @@ public class LibrarianMenu {
                     break;
                 case 3:
                     // View all books
-                    bookService.viewAllBooks();
+                    viewAllBooks();
                     break;
                 case 4:
                     // Search for a book

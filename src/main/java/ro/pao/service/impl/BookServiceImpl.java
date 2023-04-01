@@ -144,6 +144,7 @@ public class BookServiceImpl implements BookService {
     }
 
 
+
     // VALIDATIONS
     public Boolean bookGenreValidation(String genre){
         if(genre.equalsIgnoreCase("FANTASY")
@@ -164,12 +165,41 @@ public class BookServiceImpl implements BookService {
 
     // VIEW ALL BOOKS
     @Override
-    public void viewAllBooks(){
-        String text = "----------------------------- ALL BOOKS -----------------------------\n";
+    public void viewAllBooksSortedByAuthor(){
+        List<Book> booksList = getAllBooks();
+        booksList.sort(Comparator.comparing(Book::getAuthor));
+
+        String text = "----------------------------- ALL BOOKS SORTED BY AUTHOR -----------------------------\n";
         System.out.println(text);
 
-        for(Book book : getAllBooks()){
-           printBook(book);
+        for(Book book : booksList){
+            printBook(book);
+        }
+    }
+
+    @Override
+    public void viewAllBooksSortedByTitle(){
+        List<Book> booksList = getAllBooks();
+        booksList.sort(Comparator.comparing(Book::getTitle));
+
+        String text = "----------------------------- ALL BOOKS SORTED BY TITLE -----------------------------\n";
+        System.out.println(text);
+
+        for(Book book : booksList){
+            printBook(book);
+        }
+    }
+
+    @Override
+    public void viewAllBooksSortedByGenre(){
+        List<Book> booksList = getAllBooks();
+        booksList.sort(Comparator.comparing(Book::getGenre));
+
+        String text = "----------------------------- ALL BOOKS SORTED BY GENRE -----------------------------\n";
+        System.out.println(text);
+
+        for(Book book : booksList){
+            printBook(book);
         }
     }
 

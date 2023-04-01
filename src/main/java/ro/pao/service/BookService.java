@@ -25,8 +25,6 @@ public interface BookService {
 
   void populateBookDatabase();
 
-  void viewAllBooks();
-
   void searchBookByTitle();
 
   void printBook(Book book);
@@ -42,6 +40,12 @@ public interface BookService {
   void searchBookByGenre();
 
   Boolean bookGenreValidation(String genre);
+
+  void viewAllBooksSortedByAuthor();
+
+  void viewAllBooksSortedByTitle();
+
+  void viewAllBooksSortedByGenre();
 
 
 }
