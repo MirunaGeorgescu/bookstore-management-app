@@ -16,7 +16,7 @@ public class Menu {
         return (INSTANCE == null ? new Menu() : INSTANCE);
     }
 
-    // the intro method: displays the menu
+    // the intro method: displays the welcome text and the main menu
     public void intro(){
         String intro = "--------------------------- Welcome to the library! ---------------------------\n" +
                 "Please choose an option:\n" +
@@ -249,6 +249,53 @@ public class Menu {
         }
     }
 
+    // the introLoginFailed method: displays the menu for unsuccessful login
+    public void introMemberLoginFailed(){
+        String loginFailed = "----------------------------- LOGIN FAILED -----------------------------\n" +
+                "The username or password you entered is incorrect. Are you sure you are a member?\n" +
+                "Please select an option:\n" +
+                "1. Try again\n" +
+                "2. Create account\n" +
+                "3. Go back to main menu";
+
+        System.out.println(loginFailed);
+    }
+
+    // the memberLoginFailed method: displays the memberLoginFailed menu and handles the user's input
+    public void memberLoginFailed(){
+        Scanner scanner = new Scanner(System.in);
+        Boolean exit = false;
+
+        while(!exit){
+            introMemberLoginFailed();
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    // Try again
+                    if(memberLogin()){
+                        // if login is successful, displays the member menu
+                        memberMenu();
+                    } else {
+                        // if login is unsuccessful, displays the memberLoginFailed menu
+                        memberLoginFailed();
+                    }
+                    break;
+                case 2:
+                    // Create account
+                    newMember();
+                    break;
+                case 3:
+                    // Go back to main menu
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option!");
+                    break;
+            }
+        }
+    }
+
     // the mainMenu method: displays the welcome text, the main menu and handles the user's input
     public void mainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -265,7 +312,8 @@ public class Menu {
                         // if login is successful, displays the member menu
                         memberMenu();
                     } else {
-                        // if login is unsuccessful, displays the loginFailed menu
+                        // if login is unsuccessful, displays the memberLoginFailed menu
+                        memberLoginFailed();
                     }
                     break;
                 case 2:
