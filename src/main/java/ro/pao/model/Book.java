@@ -30,7 +30,8 @@ public class Book  extends AbstractEntity {
     private Integer totalNumberOfCopies;
     private Integer borrowedNumberOfCopies;
 
-    public Book(String ISBN, String title, String author, String publisher, String genre, String publicationDate, String language, Integer numberOfPages, Double price, Integer totalNumberOfCopies) {
+    public Book(String ISBN, String title, String author, String publisher, String genre, String publicationDate,
+                String language, Integer numberOfPages, Double price, Integer totalNumberOfCopies) {
         super();
         this.ISBN = ISBN;
         this.title = title;

@@ -64,4 +64,20 @@ public class BookServiceImpl implements BookService {
                 .findFirst()
                 .ifPresent(books::remove);
     }
+
+    // the populateBookDatabase method: adds books to the "database"
+    @Override
+    public void populateBookDatabase(){
+        // A man called Ove
+        Book book1 = new Book("9781444775808", "A Man Called Ove", "Fredrik Backman", "Atria Books",
+                "literary_fiction", "11/07/2014", "English", 353, 10.00,
+                5);
+        addBook(book1);
+
+        // The Shining
+        Book book2 = new Book("9780450040184", "The Shining", "Stephen King",
+                "New English Library (Hodder & Stoughton)", "horror", "01/07/1980",
+                "English", 447, 10.00, 5);
+        addBook(book2);
+    }
 }

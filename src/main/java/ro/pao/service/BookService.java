@@ -23,5 +23,5 @@ public interface BookService {
 
   void deleteBookByISBN(String ISBN);
 
-
+  void populateBookDatabase();
 }
