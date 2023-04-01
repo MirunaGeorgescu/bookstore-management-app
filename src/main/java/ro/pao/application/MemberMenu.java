@@ -1,5 +1,8 @@
 package ro.pao.application;
 
+import ro.pao.service.BookService;
+import ro.pao.service.impl.BookServiceImpl;
+
 import java.util.Scanner;
 
 public class MemberMenu {
@@ -10,7 +13,66 @@ public class MemberMenu {
 
 
 
-    //MEMBER MENU
+    private final BookService bookService = new BookServiceImpl();
+
+
+
+    // SEARCHING FOR BOOKS
+    // the introSearchBooks method: displays the menu for searching books
+    public void introSearchBooks(){
+        Scanner scanner = new Scanner(System.in);
+        String searchBookText = "----------------------------- SEARCH BOOK -----------------------------\n" +
+                "Please choose an option:\n" +
+                "1. Search by title\n" +
+                "2. Search by author\n" +
+                "3. Search by genre\n" +
+                "4. Search by ISBN\n" +
+                "5. Go back to the menu";
+        System.out.println(searchBookText);
+    }
+
+    // the searchBooks method: displays the menu for searching books and handles the user's input
+    public void searchBooks(){
+        Scanner scanner = new Scanner(System.in);
+
+        Boolean exit = false;
+        while(!exit)
+        {
+            introSearchBooks();
+            int option = scanner.nextInt();
+            switch(option){
+                case 1:
+                    // Search by title
+                    bookService.searchBookByTitle();
+                    break;
+                case 2:
+                    // Search by author
+                    bookService.searchBookByAuthor();
+                    break;
+                case 3:
+                    // Search by genre
+                    bookService.searchBookByGenre();
+                    break;
+                case 4:
+                    // Search by ISBN
+                    bookService.searchBookByISBN();
+                    break;
+                case 5:
+                    // Go back to the menu
+                    memberMenu();
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option! Please try again: ");
+                    option = scanner.nextInt();
+                    break;
+            }
+        }
+    }
+
+
+
+    // MEMBER MENU
     // the introMemberMenu: displays the menu for the members
     public void introMemberMenu(){
         String intro = "----------------------------- MEMBER MENU -----------------------------\n" +
@@ -46,6 +108,7 @@ public class MemberMenu {
                     break;
                 case 4:
                     // Search for a book
+                    searchBooks();
                     break;
                 case 5:
                     // View all books
