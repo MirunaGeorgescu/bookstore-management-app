@@ -1,8 +1,10 @@
 package ro.pao.application;
 
 import ro.pao.model.Book;
+import ro.pao.service.MemberService;
 import ro.pao.service.impl.BookServiceImpl;
 import ro.pao.service.BookService;
+import ro.pao.service.impl.MemberServiceImpl;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -15,7 +17,7 @@ public class LibrarianMenu {
 
 
     private final BookService bookService = new BookServiceImpl();
-
+    private final MemberService memberService = new MemberServiceImpl();
 
     // ADDING A NEW BOOK
     // the newBook method: creates a new book
@@ -184,6 +186,7 @@ public class LibrarianMenu {
 
 
 
+
     // LIBRARIAN MENU
     // the introLibrarianMenu: displays the menu for the librarians
     public void intoLibrarianMenu(){
@@ -192,7 +195,7 @@ public class LibrarianMenu {
                 "1. Add a book\n" +
                 "2. Remove a book\n" +
                 "3. View all books\n" +
-                "4. Search for a books\n" +
+                "4. Search for books\n" +
                 "5. View all members\n" +
                 "6. Search for a member\n" +
                 "7. Log out";
@@ -228,6 +231,7 @@ public class LibrarianMenu {
                     break;
                 case 5:
                     // View all members
+                    memberService.viewAllMembers();
                     break;
                 case 6:
                     // Search for a member

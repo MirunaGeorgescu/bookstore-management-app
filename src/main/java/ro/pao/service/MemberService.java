@@ -28,4 +28,10 @@ public interface MemberService {
 
     // the populateMemberDatabase method: adds members to the "database"
     void populateMemberDatabase();
+
+    void printMember(Member member);
+
+    void printMemberDetails(Member member);
+
+    void viewAllMembers();
 }
