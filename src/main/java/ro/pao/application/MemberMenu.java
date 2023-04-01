@@ -1,8 +1,14 @@
 package ro.pao.application;
 
+import ro.pao.model.BookCopy;
+import ro.pao.model.Member;
 import ro.pao.service.BookService;
+import ro.pao.service.MemberService;
 import ro.pao.service.impl.BookServiceImpl;
+import ro.pao.service.impl.MemberServiceImpl;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class MemberMenu {
@@ -14,8 +20,9 @@ public class MemberMenu {
 
 
     private final BookService bookService = new BookServiceImpl();
+    private final MemberService memberService = new MemberServiceImpl();
 
-
+    Menu menu = Menu.getInstance();
 
     // SEARCHING FOR BOOKS
     // the introSearchBooks method: displays the menu for searching books
@@ -32,7 +39,7 @@ public class MemberMenu {
     }
 
     // the searchBooks method: displays the menu for searching books and handles the user's input
-    public void searchBooks(){
+    public void searchBooks(String username){
         Scanner scanner = new Scanner(System.in);
 
         Boolean exit = false;
@@ -59,7 +66,7 @@ public class MemberMenu {
                     break;
                 case 5:
                     // Go back to the menu
-                    memberMenu();
+                    memberMenu(username);
                     exit = true;
                     break;
                 default:
@@ -82,7 +89,7 @@ public class MemberMenu {
         System.out.println(text);
     }
 
-    public void viewAllBooks(){
+    public void viewAllBooks(String username){
         Scanner scanner = new Scanner(System.in);
         Boolean exit = false;
 
@@ -106,7 +113,7 @@ public class MemberMenu {
                     break;
                 case 4:
                     // Go back to the menu
-                    memberMenu();
+                    memberMenu(username);
                     exit = true;
                     break;
                 default:
@@ -118,11 +125,31 @@ public class MemberMenu {
     }
 
 
+    // VIEW BORROWED BOOKS
+    void viewBorrowedBooks(String username){
+        String text = "------------------------------------ BORROWED BOOKS ------------------------------------\n";
+        System.out.println(text);
+
+        Optional<Member> member = memberService.getMemberByUserName(username);
+        Member currentMember = member.get();
+
+        List<BookCopy> borrowedBooks = currentMember.getBorrowedBooks();
+        if(borrowedBooks.isEmpty()){
+            System.out.println("You haven't borrowed any books yet!\n");
+        } else {
+            System.out.println("You have borrowed the following books: ");
+            for(BookCopy bookCopy : borrowedBooks){
+                System.out.println(bookCopy.getTitle());
+            }
+        }
+
+    }
+
 
     // MEMBER MENU
     // the introMemberMenu: displays the menu for the members
-    public void introMemberMenu(){
-        String intro = "----------------------------- MEMBER MENU -----------------------------\n" +
+    public void introMemberMenu(String username){
+        String intro = "----------------------------- Welcome back, "+ memberService.getMemberNameByUserName(username)+"! ------------------------------\n" +
                 "Please choose an option:\n" +
                 "1. Borrow a book\n" +
                 "2. Return a book\n" +
@@ -134,13 +161,13 @@ public class MemberMenu {
     }
 
     // the memberMenu method: displays the welcome text, the menu for members and handles the user's input
-    public void memberMenu(){
+    public void memberMenu(String username){
         Scanner scanner = new Scanner(System.in);
         Boolean exit = false;
 
         while(!exit)
         {
-            introMemberMenu();
+            introMemberMenu(username);
             int option = scanner.nextInt();
 
             switch(option){
@@ -152,22 +179,24 @@ public class MemberMenu {
                     break;
                 case 3:
                     // View borrowed books
+                    viewBorrowedBooks(username);
                     break;
                 case 4:
                     // Search for a book
-                    searchBooks();
+                    searchBooks(username);
                     break;
                 case 5:
                     // View all books
-                    viewAllBooks();
+                    viewAllBooks(username);
                     break;
                 case 6:
                     // 6. Log out
-                    System.out.println("See you next time!\nLogging out...");
+                    System.out.println("See you next time!\nLogging out...\n");
                     exit = true;
                     break;
                 default:
-                    System.out.println("Invalid option!");
+                    System.out.println("Invalid option!\nPlease try again:");
+                    option = scanner.nextInt();
                     break;
             }
         }

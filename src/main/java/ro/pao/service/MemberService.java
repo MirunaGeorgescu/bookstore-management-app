@@ -16,6 +16,8 @@ public interface MemberService {
 
     Optional<Member> getMemberByPhoneNumber(String phoneNumber);
 
+    String getMemberNameByUserName(String userName);
+
     void addMember(Member member);
 
     void addMembers(List<Member> membersList);
@@ -43,5 +45,7 @@ public interface MemberService {
     void searchMemberByUsername();
     void searchMemberByEmail();
     void searchMemberByPhoneNumber();
+
+
 
 }

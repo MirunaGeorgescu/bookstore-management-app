@@ -27,8 +27,8 @@ public class Menu {
 
     // MEMBER LOGIN SYSYEM
     // the memberLogin method: checks if the username and password are correct
-    public Boolean memberLogin(){
-        String loginText = "----------------------------- Welcome back! -----------------------------\n" +
+    public String memberLogin(){
+        String loginText = "------------------------------------- Welcome back! -------------------------------------\n" +
                 "Please enter your username and password:\n" +
                 "Username: ";
         System.out.println(loginText);
@@ -41,11 +41,11 @@ public class Menu {
         String password = scanner.nextLine();
 
         if (memberService.isMember(username, password)){
-            System.out.println("Login successful!");
-            return true;
+            System.out.println("Login successful!\n");
+            return username;
         } else {
-            System.out.println("Login failed!");
-            return false;
+            System.out.println("Login failed!\n");
+            return null;
         }
     }
 
@@ -73,9 +73,10 @@ public class Menu {
             switch (option) {
                 case 1:
                     // Try again
-                    if(memberLogin()){
+                    String username = memberLogin();
+                    if(username != null){
                         // if login is successful, displays the member menu
-                        memberMenu.memberMenu();
+                        memberMenu.memberMenu(username);
                     } else {
                         // if login is unsuccessful, displays the memberLoginFailed menu
                         memberLoginFailed();
@@ -250,7 +251,7 @@ public class Menu {
     //MAIN MENU
     // the intro method: displays the welcome text and the main menu
     public void intro(){
-        String intro = "--------------------------- Welcome to the library! ---------------------------\n" +
+        String intro = "-------------------------------- Welcome to the library! --------------------------------\n" +
                 "Please choose an option:\n" +
                 "1. Log in as a member\n" +
                 "2. Log in as a librarian\n" +
@@ -272,9 +273,10 @@ public class Menu {
             switch (option) {
                 case 1:
                     // Log in as a member
-                    if(memberLogin()){
+                    String username = memberLogin();
+                    if(username != null) {
                         // if login is successful, displays the member menu
-                        memberMenu.memberMenu();
+                        memberMenu.memberMenu(username);
                     } else {
                         // if login is unsuccessful, displays the memberLoginFailed menu
                         memberLoginFailed();

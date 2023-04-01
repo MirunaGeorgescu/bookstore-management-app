@@ -9,6 +9,8 @@ import ro.pao.model.enums.BookGenres;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,6 +31,9 @@ public class Book  extends AbstractEntity {
     private Double price;
     private Integer totalNumberOfCopies;
     private Integer borrowedNumberOfCopies;
+
+    private List<BookCopy> bookCopies;
+
 
     public Book(String ISBN, String title, String author, String publisher, String genre, String publicationDate,
                 String language, Integer numberOfPages, Double price, Integer totalNumberOfCopies) {
@@ -62,6 +67,34 @@ public class Book  extends AbstractEntity {
         //formatting the date
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         this.publicationDate = LocalDate.parse(publicationDate, formatter); // convert String to LocalDate
+
+        // adding the book copies
+        bookCopies = new ArrayList<>();
+        for(int i = 0; i < totalNumberOfCopies; i++){
+            BookCopy bookCopy = new BookCopy();
+
+            bookCopy.setISBN(ISBN);
+            bookCopy.setTitle(title);
+            bookCopy.setAuthor(author);
+            bookCopy.setPublisher(publisher);
+            bookCopy.setGenre(this.genre);
+            bookCopy.setRating(0.0);
+            bookCopy.setPublicationDate(this.publicationDate);
+            bookCopy.setLanguage(language);
+            bookCopy.setNumberOfPages(numberOfPages);
+            bookCopy.setPrice(price);
+            bookCopy.setTotalNumberOfCopies(totalNumberOfCopies);
+            bookCopy.setBorrowedNumberOfCopies(0);
+
+            bookCopy.setBarcode(ISBN + "-" + (i+1));
+            bookCopy.setFormat("PAPERBACK");
+            bookCopy.setStatus("AVAILABLE");
+            bookCopy.setBorrowedDate(null);
+            bookCopy.setDueDate(null);
+            bookCopy.setReturnedDate(null);
+
+            bookCopies.add(bookCopy);
+        }
     }
 
 

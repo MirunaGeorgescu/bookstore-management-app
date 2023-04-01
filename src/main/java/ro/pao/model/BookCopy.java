@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ro.pao.model.enums.BookFormat;
+import ro.pao.model.enums.BookGenres;
 import ro.pao.model.enums.BookStatus;
 
 import java.time.LocalDate;
@@ -23,4 +24,26 @@ public class BookCopy extends Book {
     private LocalDate borrowedDate;
     private LocalDate dueDate;
     private LocalDate returnedDate;
+
+    public void setFormat(String format) {
+        if(format == "HARDCOVER"){
+            this.format = BookFormat.HARDCOVER;
+        } else if(format == "PAPERBACK"){
+            this.format = BookFormat.PAPERBACK;
+        } else if(format == "EBOOK"){
+            this.format = BookFormat.EBOOK;
+        } else if(format == "AUDIOBOOK"){
+            this.format = BookFormat.AUDIOBOOK;
+        }
+    }
+
+    public void setStatus(String status) {
+        if(status == "AVAILABLE"){
+            this.status = BookStatus.AVAILABLE;
+        } else if(status == "BORROWED"){
+            this.status = BookStatus.BORROWED;
+        } else if(status == "LOST"){
+            this.status = BookStatus.LOST;
+        }
+    }
 }

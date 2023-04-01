@@ -47,6 +47,16 @@ public class MemberServiceImpl implements MemberService {
         return new ArrayList<>(members);
     }
 
+    @Override
+    public String getMemberNameByUserName(String userName){
+        return members
+                .stream()
+                .filter(member -> member.getUserName().equals(userName))
+                .findFirst()
+                .get()
+                .getName();
+    }
+
 
 
     // ADDDING
@@ -163,6 +173,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     // SEARCHING
+    @Override
     public void searchMemberByUsername(){
         String searchMemberByUsernameText = "----------------------------- SEARCH MEMBER BY USERNAME -----------------------------";
         System.out.println(searchMemberByUsernameText);
@@ -215,4 +226,7 @@ public class MemberServiceImpl implements MemberService {
             System.out.println("There is no member with the phone number " + phoneNumber + " in the database!");
         }
     }
+
+
+
 }
