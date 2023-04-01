@@ -144,6 +144,18 @@ public class LibrarianMenu {
 
 
 
+    // VIEW ALL BOOKS
+    public void viewAllBooks(){
+        String text = "----------------------------- ALL BOOKS -----------------------------\n";
+        System.out.println(text);
+
+        for(Book book : bookService.getAllBooks()){
+           text = "'" + book.getTitle() + "'" + "\n   by " + book.getAuthor() + "\n";
+           System.out.println(text);
+        }
+    }
+
+
     // LIBRARIAN MENU
     // the introLibrarianMenu: displays the menu for the librarians
     public void intoLibrarianMenu(){
@@ -180,6 +192,7 @@ public class LibrarianMenu {
                     break;
                 case 3:
                     // View all books
+                    viewAllBooks();
                     break;
                 case 4:
                     // Search for a book
