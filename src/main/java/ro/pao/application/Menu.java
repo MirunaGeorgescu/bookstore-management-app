@@ -1,9 +1,12 @@
 package ro.pao.application;
 
+import ro.pao.model.Book;
 import ro.pao.service.LibrarianService;
 import ro.pao.service.MemberService;
 import ro.pao.service.impl.LibrarianServiceImpl;
 import ro.pao.service.impl.MemberServiceImpl;
+import ro.pao.service.impl.BookServiceImpl;
+import ro.pao.service.BookService;
 
 import java.util.Scanner;
 
@@ -11,6 +14,7 @@ public class Menu {
     private static Menu INSTANCE;
     private final MemberService memberService = new MemberServiceImpl();
     private final LibrarianService librarianService = new LibrarianServiceImpl();
+    private final BookService bookService = new BookServiceImpl();
 
     public static Menu getInstance(){
         return (INSTANCE == null ? new Menu() : INSTANCE);
@@ -171,6 +175,7 @@ public class Menu {
             switch(option){
                 case 1:
                     // Add a book
+                    newBook();
                     break;
                 case 2:
                     // Remove a book
@@ -189,6 +194,7 @@ public class Menu {
                     break;
                 case 7:
                     // Log out
+                    System.out.println("Logging out...");
                     exit = true;
                     break;
                 default:
@@ -239,7 +245,7 @@ public class Menu {
                     break;
                 case 6:
                     // 6. Log out
-                    System.out.println("See you next time!");
+                    System.out.println("See you next time!\n Logging out...");
                     exit = true;
                     break;
                 default:
@@ -341,6 +347,77 @@ public class Menu {
                     break;
             }
         }
+    }
+
+    public Boolean bookGenreValidation(String genre){
+        if(genre.equalsIgnoreCase("FANTASY")
+                || genre.equalsIgnoreCase("ROMANCE")
+                || genre.equalsIgnoreCase("SCIENCE_FICTION")
+                || genre.equalsIgnoreCase("LITERARY_FICTION")
+                || genre.equalsIgnoreCase("HORROR")
+                || genre.equalsIgnoreCase("MYSTERY")
+                || genre.equalsIgnoreCase("THRILLER")){
+            genre.toUpperCase();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // the newBook method: creates a new book
+    public void newBook(){
+        Scanner scanner = new Scanner(System.in);
+
+        String newBookText = "----------------------------- NEW BOOK -----------------------------\n" +
+                "Please enter the book's title: ";
+        System.out.println(newBookText);
+        String title = scanner.nextLine();
+
+        newBookText = "Please enter the book's author: ";
+        System.out.println(newBookText);
+        String author = scanner.nextLine();
+
+
+        newBookText = "Please enter the book's genre: ";
+        System.out.println(newBookText);
+        String genre = scanner.nextLine();
+        while(!bookGenreValidation(genre)){
+            System.out.println("Invalid genre! The options are:\n " +
+                    "-> FANTASY\n -> ROMANCE\n -> SCIENCE_FICTION\n -> LITERARY_FICTION\n -> HORROR\n -> MYSTERY\n -> THRILLER\n" +
+                    "Please enter a valid genre: ");
+            genre = scanner.nextLine();
+        }
+
+        newBookText = "Please enter the book's ISBN: ";
+        System.out.println(newBookText);
+        String isbn = scanner.nextLine();
+
+        newBookText = "Please enter the book's publisher: ";
+        System.out.println(newBookText);
+        String publisher = scanner.nextLine();
+
+        newBookText = "Please enter the book's date (dd/mm/yyyy) of publication: ";
+        System.out.println(newBookText);
+        String date = scanner.nextLine();
+
+        newBookText = "Please enter the book's language: ";
+        System.out.println(newBookText);
+        String language = scanner.nextLine();
+
+        newBookText = "Please enter the book's number of pages: ";
+        System.out.println(newBookText);
+        Integer pages = scanner.nextInt();
+
+        newBookText = "Please enter the book's price: ";
+        System.out.println(newBookText);
+        Double price = scanner.nextDouble();
+
+        newBookText = "Please enter the book's number of copies: ";
+        System.out.println(newBookText);
+        Integer copies = scanner.nextInt();
+
+        Book book = new Book(isbn, title, author, publisher, genre, date, language, pages, price, copies);
+        bookService.addBook(book);
     }
 
     // the mainMenu method: displays the welcome text, the main menu and handles the user's input

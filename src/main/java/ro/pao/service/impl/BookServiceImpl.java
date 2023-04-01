@@ -64,7 +64,4 @@ public class BookServiceImpl implements BookService {
                 .findFirst()
                 .ifPresent(books::remove);
     }
-
-
-
 }
