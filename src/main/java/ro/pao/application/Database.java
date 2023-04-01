@@ -19,6 +19,4 @@ public class Database {
         memberService.populateMemberDatabase();
         librarianService.populateLibrarianDatabase();
     }
-
-
 }
