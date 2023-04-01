@@ -296,6 +296,53 @@ public class Menu {
         }
     }
 
+    // the introLoginFailed method: displays the menu for unsuccessful login
+    public void intoLibrarianLoginFailed(){
+        String loginFailed = "----------------------------- LOGIN FAILED -----------------------------\n" +
+                "The username or password you entered is incorrect. Are you sure you are a librarian?\n" +
+                "Please select an option:\n" +
+                "1. Try again\n" +
+                "2. Create account\n" +
+                "3. Go back to main menu";
+
+        System.out.println(loginFailed);
+    }
+
+    // the librarianLoginFailed method: displays the librarianLoginFailed menu and handles the user's input
+    public void librarianLoginFailed(){
+        Scanner scanner = new Scanner(System.in);
+        Boolean exit = false;
+
+        while(!exit){
+            intoLibrarianLoginFailed();
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    // Try again
+                    if(librarianLogin()){
+                        // if login is successful, displays the librarian menu
+                        librarianMenu();
+                    } else {
+                        // if login is unsuccessful, displays the librarianLoginFailed menu
+                        librarianLoginFailed();
+                    }
+                    break;
+                case 2:
+                    // Create account
+                    newLibrarian();
+                    break;
+                case 3:
+                    // Go back to main menu
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option!");
+                    break;
+            }
+        }
+    }
+
     // the mainMenu method: displays the welcome text, the main menu and handles the user's input
     public void mainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -322,7 +369,8 @@ public class Menu {
                         // if login is successful, display the librarian menu
                         librarianMenu();
                     } else {
-                        // if login is unsuccessful, display the loginFailed menu
+                        // if login is unsuccessful, display the librarianLoginFailed menu
+                        librarianLoginFailed();
                     }
                     break;
                 case 3:
