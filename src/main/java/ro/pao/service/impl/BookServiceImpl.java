@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
     public Optional<Book> getBookByTitle(String title){
         return books
                 .stream()
-                .filter(book -> book.getTitle().equals(title))
+                .filter(book -> book.getTitle().equalsIgnoreCase(title))
                 .findFirst();
     }
 
@@ -38,7 +38,7 @@ public class BookServiceImpl implements BookService {
         List<Book> booksByAuthor = new ArrayList<>();
 
         for(Book book : books){
-            if(book.getAuthor().equals(author)){
+            if(book.getAuthor().equalsIgnoreCase(author)){
                 booksByAuthor.add(book);
             }
         }

@@ -1,12 +1,15 @@
 package ro.pao.application;
 
+import ro.pao.model.Book;
 import ro.pao.model.BookCopy;
 import ro.pao.model.Member;
+import ro.pao.model.enums.BookStatus;
 import ro.pao.service.BookService;
 import ro.pao.service.MemberService;
 import ro.pao.service.impl.BookServiceImpl;
 import ro.pao.service.impl.MemberServiceImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -22,7 +25,7 @@ public class MemberMenu {
     private final BookService bookService = new BookServiceImpl();
     private final MemberService memberService = new MemberServiceImpl();
 
-    Menu menu = Menu.getInstance();
+
 
     // SEARCHING FOR BOOKS
     // the introSearchBooks method: displays the menu for searching books
@@ -77,6 +80,9 @@ public class MemberMenu {
         }
     }
 
+
+
+
     // VIEW ALL BOOKS
     // the introViewAllBooks method: displays the menu for viewing all books
     public void introViewAllBooks(){
@@ -125,7 +131,9 @@ public class MemberMenu {
     }
 
 
-    // VIEW BORROWED BOOKS
+
+
+    // BORROWING BOOKS
     void viewBorrowedBooks(String username){
         String text = "------------------------------------ BORROWED BOOKS ------------------------------------\n";
         System.out.println(text);
@@ -142,6 +150,58 @@ public class MemberMenu {
                 System.out.println(bookCopy.getTitle());
             }
         }
+
+    }
+
+    void borrowBook(String username){
+        Scanner scanner = new Scanner(System.in);
+
+        String text = "------------------------------------ BORROW BOOK ------------------------------------";
+        System.out.println(text);
+
+        Member currentMember = memberService.getMemberByUserName(username).get();
+        List<BookCopy> borrowedBooks = currentMember.getBorrowedBooks();
+        if(borrowedBooks.size() == 5){
+            System.out.println("You have reached the maximum number of books you can borrow! Please return a book before borrowing another one.\n");
+        } else{
+            text = "Please enter the title of the book you want to borrow: ";
+            System.out.println(text);
+            String title = scanner.nextLine();
+
+            Optional<Book> book = bookService.getBookByTitle(title);
+            if(!book.isPresent()){
+                System.out.println("There is no book with this title in the library!\n");
+            } else {
+                Book currentBook = book.get();
+
+                if(currentBook.getTotalNumberOfCopies() - currentBook.getBorrowedNumberOfCopies() == 0){
+                    System.out.println("There are no copies of this book available for borrowing!\n");
+                } else{
+
+                    List<BookCopy> bookCopies = currentBook.getBookCopies();
+                    for(BookCopy bookCopy: bookCopies){
+                        if(bookCopy.getStatus().toString().equalsIgnoreCase("AVAILABLE")){
+                            // set the status of the book copy to BORROWED
+                            bookCopy.setStatus("BORROWED");
+                            bookCopy.setBorrowedDate(LocalDate.now());
+                            bookCopy.setDueDate(LocalDate.now().plusDays(30));
+                            currentBook.setBorrowedNumberOfCopies(currentBook.getBorrowedNumberOfCopies() + 1);
+
+                            // add the book copy to the list of borrowed books of the current member
+                            currentMember.getBorrowedBooks().add(bookCopy);
+                            System.out.println("You have successfully borrowed the book: " + bookCopy.getTitle() + "\n");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
 
     }
 
@@ -173,6 +233,7 @@ public class MemberMenu {
             switch(option){
                 case 1:
                     // Borrow a book
+                    borrowBook(username);
                     break;
                 case 2:
                     // Return a book
