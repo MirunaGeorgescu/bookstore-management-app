@@ -3,7 +3,6 @@ package ro.pao.service.impl;
 import ro.pao.model.Member;
 import ro.pao.service.MemberService;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 public class MemberServiceImpl implements MemberService {
@@ -26,8 +25,25 @@ public class MemberServiceImpl implements MemberService {
                 .filter(member -> member.getUserName().equals(userName))
                 .findFirst();
     }
+
     @Override
-    public List<Member> gettAllMembers(){
+    public Optional<Member> getMemberByEmail(String email){
+        return members
+                .stream()
+                .filter(member -> member.getEmail().equals(email))
+                .findFirst();
+    }
+
+    @Override
+    public Optional<Member> getMemberByPhoneNumber(String phoneNumber){
+        return members
+                .stream()
+                .filter(member -> member.getPhoneNumber().equals(phoneNumber))
+                .findFirst();
+    }
+
+    @Override
+    public List<Member> getAllMembers(){
         return new ArrayList<>(members);
     }
 
@@ -129,17 +145,74 @@ public class MemberServiceImpl implements MemberService {
         System.out.println(text);
     }
 
+    // the viewAllMembers method: prints the name, username and email of all members
     public void viewAllMembers(){
         String viewAllMembersText = "----------------------------- VIEW ALL MEMBERS -----------------------------";
         System.out.println(viewAllMembersText);
 
-        List<Member> membersList = gettAllMembers();
+        List<Member> membersList = getAllMembers();
         if(membersList.isEmpty()){
             System.out.println("There are no members in the database!");
         } else {
             for(Member member : membersList){
                 printMember(member);
             }
+        }
+    }
+
+
+
+    // SEARCHING
+    public void searchMemberByUsername(){
+        String searchMemberByUsernameText = "----------------------------- SEARCH MEMBER BY USERNAME -----------------------------";
+        System.out.println(searchMemberByUsernameText);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the username of the member you want to search for: ");
+        String username = scanner.nextLine();
+
+        Optional<Member> member = getMemberByUserName(username);
+        if(member.isPresent()){
+            System.out.println("Member found!");
+            printMember(member.get());
+        } else {
+            System.out.println("There is no member with the username " + username + " in the database!");
+        }
+    }
+
+    @Override
+    public void searchMemberByEmail(){
+        String searchMemberByEmailText = "----------------------------- SEARCH MEMBER BY EMAIL -----------------------------";
+        System.out.println(searchMemberByEmailText);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the email of the member you want to search for: ");
+        String email = scanner.nextLine();
+
+        Optional<Member> member = getMemberByEmail(email);
+        if(member.isPresent()){
+            System.out.println("Member found!");
+            printMember(member.get());
+        } else {
+            System.out.println("There is no member with the email " + email + " in the database!");
+        }
+    }
+
+    @Override
+    public void searchMemberByPhoneNumber(){
+        String searchMemberByPhoneNumberText = "----------------------------- SEARCH MEMBER BY PHONE NUMBER -----------------------------";
+        System.out.println(searchMemberByPhoneNumberText);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the phone number of the member you want to search for: ");
+        String phoneNumber = scanner.nextLine();
+
+        Optional<Member> member = getMemberByPhoneNumber(phoneNumber);
+        if(member.isPresent()){
+            System.out.println("Member found!");
+            printMember(member.get());
+        } else {
+            System.out.println("There is no member with the phone number " + phoneNumber + " in the database!");
         }
     }
 }

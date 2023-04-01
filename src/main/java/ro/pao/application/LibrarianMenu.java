@@ -6,7 +6,6 @@ import ro.pao.service.impl.BookServiceImpl;
 import ro.pao.service.BookService;
 import ro.pao.service.impl.MemberServiceImpl;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class LibrarianMenu {
@@ -77,6 +76,8 @@ public class LibrarianMenu {
     }
 
 
+
+
     // REMOVING A BOOK
     // the introBookNotFound method: displays the options when a book is not found
     public void introBookNotFound(){
@@ -133,6 +134,7 @@ public class LibrarianMenu {
 
 
 
+    // SEARCHING
     // SEARCH BOOKS
     public void introSearchBooks(){
         Scanner scanner = new Scanner(System.in);
@@ -184,6 +186,50 @@ public class LibrarianMenu {
         }
     }
 
+    // SEARCH MEMBERS
+    public void introSearchMembers(){
+        Scanner scanner = new Scanner(System.in);
+        String searchMemberText = "----------------------------- SEARCH MEMBER -----------------------------\n" +
+                "Please choose an option:\n" +
+                "1. Search by username\n" +
+                "2. Search by email\n" +
+                "3. Search by phone number\n" +
+                "4. Go back to the menu";
+        System.out.println(searchMemberText);
+    }
+
+    public void searchMembers(){
+        Scanner scanner = new Scanner(System.in);
+        Boolean exit = false;
+        while(!exit)
+        {
+            introSearchMembers();
+            int option = scanner.nextInt();
+            switch(option){
+                case 1:
+                    // Search by username
+                    memberService.searchMemberByUsername();
+                    break;
+                case 2:
+                    // Search by email
+                    memberService.searchMemberByEmail();
+                    break;
+                case 3:
+                    // Search by phone number
+                    memberService.searchMemberByPhoneNumber();
+                    break;
+                case 4:
+                    // Go back to the menu
+                    librarianMenu();
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option! Please try again: ");
+                    option = scanner.nextInt();
+                    break;
+            }
+        }
+    }
 
 
 
@@ -235,6 +281,7 @@ public class LibrarianMenu {
                     break;
                 case 6:
                     // Search for a member
+                    searchMembers();
                     break;
                 case 7:
                     // Log out

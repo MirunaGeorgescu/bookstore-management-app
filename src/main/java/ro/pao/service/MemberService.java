@@ -10,8 +10,11 @@ public interface MemberService {
     Optional<Member> getMemberById(UUID id);
 
     Optional<Member> getMemberByUserName(String userName);
+    Optional<Member> getMemberByEmail(String email);
 
-    List<Member> gettAllMembers();
+    List<Member> getAllMembers();
+
+    Optional<Member> getMemberByPhoneNumber(String phoneNumber);
 
     void addMember(Member member);
 
@@ -33,5 +36,12 @@ public interface MemberService {
 
     void printMemberDetails(Member member);
 
+    // the viewAllMembers method: prints the name, username and email of all members
     void viewAllMembers();
+
+    // SEARCHING
+    void searchMemberByUsername();
+    void searchMemberByEmail();
+    void searchMemberByPhoneNumber();
+
 }
