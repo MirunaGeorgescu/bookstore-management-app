@@ -132,7 +132,6 @@ public class MemberMenu {
 
 
 
-
     // BORROWING BOOKS
     void viewBorrowedBooks(String username){
         String text = "------------------------------------ BORROWED BOOKS ------------------------------------\n";
@@ -205,6 +204,50 @@ public class MemberMenu {
 
     }
 
+    void returnBook(String username){
+        Scanner scanner = new Scanner(System.in);
+
+        String text = "------------------------------------ RETURN BOOK ------------------------------------";
+        System.out.println(text);
+
+        Member currentMember = memberService.getMemberByUserName(username).get();
+        List<BookCopy> borrowedBooks = currentMember.getBorrowedBooks();
+
+        if(borrowedBooks.isEmpty()){
+            System.out.println("You haven't borrowed any books yet!\n");
+        } else {
+            System.out.println("You have borrowed the following books: ");
+            for (BookCopy bookCopy : borrowedBooks) {
+                System.out.println(bookCopy.getTitle());
+            }
+            text = "Please enter the title of the book you want to return: ";
+            System.out.println(text);
+            String title = scanner.nextLine();
+
+            for (BookCopy book : borrowedBooks) {
+                if (book.getTitle().equalsIgnoreCase(title)) {
+
+                    // check if the book was returned after the due date
+                    if (book.getDueDate().isBefore(LocalDate.now())) {
+                        System.out.println("You have returned the book " + book.getTitle() + " after the due date! You will be charged a fine.\n");
+                    } else {
+                        System.out.println("You have successfully returned the book " + book.getTitle() + "\n");
+                    }
+
+                    book.setStatus("AVAILABLE");
+                    book.setBorrowedDate(null);
+                    book.setDueDate(null);
+                    currentMember.getBorrowedBooks().remove(book);
+
+                    break;
+                }
+            }
+
+        }
+
+    }
+
+
 
     // MEMBER MENU
     // the introMemberMenu: displays the menu for the members
@@ -237,6 +280,7 @@ public class MemberMenu {
                     break;
                 case 2:
                     // Return a book
+                    returnBook(username);
                     break;
                 case 3:
                     // View borrowed books
