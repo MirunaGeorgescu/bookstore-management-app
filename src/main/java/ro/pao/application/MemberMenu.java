@@ -82,7 +82,6 @@ public class MemberMenu {
 
 
 
-
     // VIEW ALL BOOKS
     // the introViewAllBooks method: displays the menu for viewing all books
     public void introViewAllBooks(){
@@ -146,7 +145,7 @@ public class MemberMenu {
         } else {
             System.out.println("You have borrowed the following books: ");
             for(BookCopy bookCopy : borrowedBooks){
-                System.out.println(bookCopy.getTitle());
+                System.out.println(bookCopy.getTitle() + " by " + bookCopy.getAuthor() + "\n   due on: " + bookCopy.getDueDate() + "\n");
             }
         }
 
@@ -188,7 +187,7 @@ public class MemberMenu {
 
                             // add the book copy to the list of borrowed books of the current member
                             currentMember.getBorrowedBooks().add(bookCopy);
-                            System.out.println("You have successfully borrowed the book: " + bookCopy.getTitle() + "\n");
+                            System.out.println("You have successfully borrowed the book: " + bookCopy.getTitle() + "!\n" + "The due date is: " + bookCopy.getDueDate() + "\n");
                             break;
                         }
                     }
@@ -214,7 +213,7 @@ public class MemberMenu {
         List<BookCopy> borrowedBooks = currentMember.getBorrowedBooks();
 
         if(borrowedBooks.isEmpty()){
-            System.out.println("You haven't borrowed any books yet!\n");
+            System.out.println("\nYou haven't borrowed any books yet!\n");
         } else {
             System.out.println("You have borrowed the following books: ");
             for (BookCopy bookCopy : borrowedBooks) {
