@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class BookCopy extends Book {
+public final class BookCopy extends Book {
     // inherits from AbstractEntity: id, createdDate, updatedDate, deletedDate
     // inherits from Book: ISBN, title, author, publisher, genre, rating, publicationDate, language, numberOfPages, price, totalNumberOfCopies, borrowedNumberOfCopies
     private String barcode;

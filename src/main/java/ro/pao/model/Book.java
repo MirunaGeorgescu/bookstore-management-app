@@ -17,7 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Book  extends AbstractEntity {
+public sealed class Book extends AbstractEntity
+        permits BookCopy {
     // inherits from AbstractEntity: id, createdDate, updatedDate, deletedDate
     private String ISBN;
     private String title;
