@@ -3,6 +3,8 @@ package ro.pao.service.impl;
 import ro.pao.model.Book;
 import ro.pao.service.BookService;
 
+import java.net.URI;
+import java.net.http.HttpRequest;
 import java.util.*;
 
 public class BookServiceImpl implements BookService {
@@ -310,5 +312,6 @@ public class BookServiceImpl implements BookService {
             }
         }
     }
+
 
 }

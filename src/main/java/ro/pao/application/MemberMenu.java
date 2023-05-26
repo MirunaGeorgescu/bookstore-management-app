@@ -251,7 +251,6 @@ public class MemberMenu {
     }
 
 
-
     // MEMBER MENU
     // the introMemberMenu: displays the menu for the members
     public void introMemberMenu(String username){

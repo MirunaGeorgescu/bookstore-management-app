@@ -1,7 +1,7 @@
 package ro.pao.application;
 
 
-import ro.pao.InvalidOptionExcetion;
+import ro.pao.InvalidOptionException;
 import ro.pao.service.LibrarianService;
 import ro.pao.service.MemberService;
 import ro.pao.service.impl.LibrarianServiceImpl;
@@ -253,9 +253,9 @@ public class Menu {
 
     //MAIN MENU
     // validateInput method: checks if the user's input is valid, if not, it throws an exception
-    public void validateInput(int option) throws InvalidOptionExcetion{
+    public void validateInput(int option) throws InvalidOptionException {
         if(option < 1 || option > 5){
-            throw new InvalidOptionExcetion("Invalid option!");
+            throw new InvalidOptionException("Invalid option!");
         }
     }
     // the intro method: displays the welcome text and the main menu
@@ -319,7 +319,7 @@ public class Menu {
                         break;
                 }
 
-            } catch (InvalidOptionExcetion e){
+            } catch (InvalidOptionException e){
                 logger.info("An invalid option was selected!");
                 logger.log(Level.FINE, "An invalid option was selected!", e);
                 System.out.println("Invalid option!");
