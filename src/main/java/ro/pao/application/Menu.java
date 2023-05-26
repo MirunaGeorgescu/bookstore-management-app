@@ -1,6 +1,7 @@
 package ro.pao.application;
 
 
+import ro.pao.InvalidOptionExcetion;
 import ro.pao.service.LibrarianService;
 import ro.pao.service.MemberService;
 import ro.pao.service.impl.LibrarianServiceImpl;
@@ -8,6 +9,8 @@ import ro.pao.service.impl.MemberServiceImpl;
 
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Menu {
     private static Menu INSTANCE;
@@ -18,7 +21,7 @@ public class Menu {
 
     private final MemberService memberService = new MemberServiceImpl();
     private final LibrarianService librarianService = new LibrarianServiceImpl();
-
+    private Logger logger;
 
     LibrarianMenu librarianMenu = LibrarianMenu.getInstance();
     MemberMenu memberMenu = MemberMenu.getInstance();
@@ -249,6 +252,12 @@ public class Menu {
 
 
     //MAIN MENU
+    // validateInput method: checks if the user's input is valid, if not, it throws an exception
+    public void validateInput(int option) throws InvalidOptionExcetion{
+        if(option < 1 || option > 5){
+            throw new InvalidOptionExcetion("Invalid option!");
+        }
+    }
     // the intro method: displays the welcome text and the main menu
     public void intro(){
         String intro = "-------------------------------- Welcome to the library! --------------------------------\n" +
@@ -270,44 +279,50 @@ public class Menu {
             intro();
             int option = scanner.nextInt();
 
-            switch (option) {
-                case 1:
-                    // Log in as a member
-                    String username = memberLogin();
-                    if(username != null) {
-                        // if login is successful, displays the member menu
-                        memberMenu.memberMenu(username);
-                    } else {
-                        // if login is unsuccessful, displays the memberLoginFailed menu
-                        memberLoginFailed();
-                    }
-                    break;
-                case 2:
-                    // Log in as a librarian
-                    if(librarianLogin()) {
-                        // if login is successful, display the librarian menu
-                        librarianMenu.librarianMenu();
-                    } else {
-                        // if login is unsuccessful, display the librarianLoginFailed menu
-                        librarianLoginFailed();
-                    }
-                    break;
-                case 3:
-                    // Make a new member account
-                    newMember();
-                    break;
-                case 4:
-                    // Make a new librarian account
-                    newLibrarian();
-                    break;
-                case 5:
-                    // Exit
-                    System.out.println("Thank you for using our library!");
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid option!");
-                    break;
+            try {
+                validateInput(option);
+
+                switch (option) {
+                    case 1:
+                        // Log in as a member
+                        String username = memberLogin();
+                        if (username != null) {
+                            // if login is successful, displays the member menu
+                            memberMenu.memberMenu(username);
+                        } else {
+                            // if login is unsuccessful, displays the memberLoginFailed menu
+                            memberLoginFailed();
+                        }
+                        break;
+                    case 2:
+                        // Log in as a librarian
+                        if (librarianLogin()) {
+                            // if login is successful, display the librarian menu
+                            librarianMenu.librarianMenu();
+                        } else {
+                            // if login is unsuccessful, display the librarianLoginFailed menu
+                            librarianLoginFailed();
+                        }
+                        break;
+                    case 3:
+                        // Make a new member account
+                        newMember();
+                        break;
+                    case 4:
+                        // Make a new librarian account
+                        newLibrarian();
+                        break;
+                    case 5:
+                        // Exit
+                        System.out.println("Thank you for using our library!");
+                        exit = true;
+                        break;
+                }
+
+            } catch (InvalidOptionExcetion e){
+                logger.info("An invalid option was selected!");
+                logger.log(Level.FINE, "An invalid option was selected!", e);
+                System.out.println("Invalid option!");
             }
         }
     }

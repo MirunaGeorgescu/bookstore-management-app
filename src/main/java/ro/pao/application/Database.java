@@ -7,21 +7,28 @@ import ro.pao.service.impl.MemberServiceImpl;
 import ro.pao.service.BookService;
 import ro.pao.service.impl.BookServiceImpl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 public class Database {
     private static Database INSTANCE;
+
+    public static Database getInstance(){
+        return (INSTANCE == null ? new Database() : INSTANCE);
+    }
+
+    //SIMULATING A DATABASE
     private final MemberService memberService = new MemberServiceImpl();
 
     private final LibrarianService librarianService = new LibrarianServiceImpl();
 
     private final BookService bookService = new BookServiceImpl();
 
-    public static Database getInstance(){
-        return (INSTANCE == null ? new Database() : INSTANCE);
-    }
-
     public void populateDatabase() {
         memberService.populateMemberDatabase();
         librarianService.populateLibrarianDatabase();
         bookService.populateBookDatabase();
     }
+
 }

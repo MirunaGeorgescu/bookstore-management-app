@@ -34,6 +34,7 @@ public class BookServiceImpl implements BookService {
                 .findFirst();
     }
 
+    @Override
     public List<Book> getBookByAuthor(String author){
         List<Book> booksByAuthor = new ArrayList<>();
 
