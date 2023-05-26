@@ -87,10 +87,11 @@ public class MemberMenu {
     public void introViewAllBooks(){
         String text = "----------------------------- ALL BOOKS -----------------------------\n" +
                 "Please choose an option:\n" +
-                "1. View all books sorted by Author\n" +
-                "2. View all books sorted by Title\n" +
-                "3. View all books sorted by Genre\n" +
-                "4. Go back to the menu";
+                "1. View all books\n" +
+                "2. View all books sorted by Author\n" +
+                "3. View all books sorted by Title\n" +
+                "4. View all books sorted by Genre\n" +
+                "5. Go back to the menu";
         System.out.println(text);
     }
 
@@ -105,25 +106,28 @@ public class MemberMenu {
 
             switch(option){
                 case 1:
+                    // View all books
+                    bookService.viewAllBooks();
+                    break;
+                case 2:
                     // View all books sorted by Author
                     bookService.viewAllBooksSortedByAuthor();
                     break;
-                case 2:
+                case 3:
                     // View all books sorted by Title
                     bookService.viewAllBooksSortedByTitle();
                     break;
-                case 3:
+                case 4:
                     // View all books sorted by Genre
                     bookService.viewAllBooksSortedByGenre();
                     break;
-                case 4:
+                case 5:
                     // Go back to the menu
                     memberMenu(username);
                     exit = true;
                     break;
                 default:
                     System.out.println("Invalid option! Please try again: ");
-                    option = scanner.nextInt();
                     break;
             }
         }

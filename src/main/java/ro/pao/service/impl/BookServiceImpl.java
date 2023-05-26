@@ -165,6 +165,19 @@ public class BookServiceImpl implements BookService {
 
     // VIEW ALL BOOKS
     @Override
+    public void viewAllBooks(){
+        String text = "----------------------------- ALL BOOKS -----------------------------\n";
+        System.out.println(text);
+
+        List <Book> booksList = getAllBooks();
+
+        Iterator <Book> iterator = booksList.iterator();
+        while (iterator.hasNext()){
+            Book book = iterator.next();
+            printBook(book);
+        }
+    }
+    @Override
     public void viewAllBooksSortedByAuthor(){
         List<Book> booksList = getAllBooks();
         booksList.sort(Comparator.comparing(Book::getAuthor));
