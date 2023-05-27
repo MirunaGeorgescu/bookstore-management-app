@@ -279,6 +279,11 @@ public class LibrarianMenu {
         }
     }
 
+    // booksToCSVFile: exports all books to a CSV file
+    public void booksCSVFile(){
+        bookService.booksCSVFile();
+    }
+
 
     // LIBRARIAN MENU
     // the introLibrarianMenu: displays the menu for the librarians
@@ -288,10 +293,11 @@ public class LibrarianMenu {
                 "1. Add a book\n" +
                 "2. Remove a book\n" +
                 "3. View all books\n" +
-                "4. Search for books\n" +
-                "5. View all members\n" +
-                "6. Search for a member\n" +
-                "7. Log out";
+                "4. Export all books to a CSV file\n" +
+                "5. Search for books\n" +
+                "6. View all members\n" +
+                "7. Search for a member\n" +
+                "8. Log out";
         System.out.println(intro);
     }
 
@@ -319,18 +325,22 @@ public class LibrarianMenu {
                     viewAllBooks();
                     break;
                 case 4:
+                    // CSV file containing all books
+                    booksCSVFile();
+                    break;
+                case 5:
                     // Search for a book
                     searchBooks();
                     break;
-                case 5:
+                case 6:
                     // View all members
                     memberService.viewAllMembers();
                     break;
-                case 6:
+                case 7:
                     // Search for a member
                     searchMembers();
                     break;
-                case 7:
+                case 8:
                     // Log out
                     System.out.println("Logging out...");
                     exit = true;

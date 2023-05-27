@@ -3,9 +3,15 @@ package ro.pao.service.impl;
 import ro.pao.model.Book;
 import ro.pao.service.BookService;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.util.*;
+
+import com.opencsv.CSVWriter;
 
 public class BookServiceImpl implements BookService {
     public static Set<Book> books = new HashSet<>();
@@ -314,4 +320,31 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    // Printing the book detalis in a CSV file
+    @Override
+    public void booksCSVFile(){
+        List <Book> booksList = getAllBooks();
+        String fileName = "books.csv";
+
+        try{
+              CSVWriter writer = new CSVWriter(new FileWriter(fileName));
+
+              List<String[]> data = new ArrayList<>();
+
+              String[] header = {"Title", "Author", "Genre", "ISBN", "Total number of copies", "Number of borrowed copies"};
+              data.add(header);
+
+              for(Book book: booksList){
+                  String[] row = {book.getTitle(), book.getAuthor(), book.getGenre().toString(), book.getISBN(), String.valueOf(book.getTotalNumberOfCopies()), String.valueOf(book.getBorrowedNumberOfCopies())};
+                  data.add(row);
+              }
+
+              System.out.println("CSV file created successfully!");
+              writer.writeAll(data);
+              writer.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

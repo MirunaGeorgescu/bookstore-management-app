@@ -47,4 +47,7 @@ public interface BookService {
   void viewAllBooksSortedByAuthor();
   void viewAllBooksSortedByTitle();
   void viewAllBooksSortedByGenre();
+
+  // Printing in a CSV file
+  void booksCSVFile();
 }

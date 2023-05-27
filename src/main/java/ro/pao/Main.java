@@ -10,8 +10,6 @@ public class Main {
         Database database = Database.getInstance();
         database.populateDatabase();
 
-
-
         Menu menu = Menu.getInstance();
         menu.mainMenu();
     }
