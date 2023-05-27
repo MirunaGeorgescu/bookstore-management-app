@@ -1,7 +1,7 @@
 package ro.pao.application;
 
 
-import ro.pao.exceptions.InvalidOptionException;
+import ro.pao.InvalidOptionException;
 import ro.pao.service.LibrarianService;
 import ro.pao.service.MemberService;
 import ro.pao.service.impl.LibrarianServiceImpl;
