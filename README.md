@@ -1,7 +1,7 @@
-# 📚 Bookstore Management App
+# 📚 Library Management App
 
 ## 📋 Overview
-This bookstore management app was developed as part of the Advanced Object-Oriented Programming course during the second semester of the second year at the Faculty of Mathematics and Computer Science, University of Bucharest.
+This library management app was developed as part of the Advanced Object-Oriented Programming course during the second semester of the second year at the Faculty of Mathematics and Computer Science, University of Bucharest.
 
 
 ## 💻 Key Features
